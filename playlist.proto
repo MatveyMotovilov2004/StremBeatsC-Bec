@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option csharp_namespace = "Music.Grpc.Playlist";
+
+package music_business;
+
+service PlaylistGrpsService{
+	rpc AddPlaylist (AddPlaylistRequest) returns (AddPlaylistRespounse);
+
+	rpc AddPlaylistTrack (AddPlaylistTrackRequest) returns (AddPlaylistRespounse);
+
+	rpc CreatePlaylist (CreatePlaylistRequest) returns (CreatePlaylistRespounse);
+
+	rpc DeletePlaylist (DeletePlaylistRequest) returns (DeletePlaylistRespounse);
+
+	rpc DeletePlaylistTrack (DeletePlaylistTrack) returns (DeletePlaylistRespounse);
+}
+
+message AddPlaylistRequest{
+
+}
+message AddPlaylistRespounse{
+
+}
+
+message AddPlaylistTrackRequest{
+
+}
+message AddPlaylistTrackRespounse{
+
+}
+
+message CreatePlaylistRequest{
+
+}
+message CreatePlaylistRespounse{
+
+}
+
+message DeletePlaylistRequest{
+
+}
+message DeletePlaylistRespounse{
+
+}
+
+message DeletePlaylistTrackRequest{
+
+}
+message DeletePlaylistTrackRespounse{
+
+}

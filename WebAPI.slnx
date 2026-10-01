@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/Protos/">
+    <File Path="album.proto" />
+    <File Path="artist.proto" />
+    <File Path="authorize.proto" />
+    <File Path="favoritetrack.proto" />
+    <File Path="moderation.proto" />
+    <File Path="playlist.proto" />
+    <File Path="Register.proto" />
+    <File Path="search.proto" />
+    <File Path="Track.proto" />
+    <File Path="upload_track.proto" />
+    <File Path="user.proto" />
+  </Folder>
+  <Project Path="MusicBusinessService/MusicBusinessService.csproj" Id="a340f524-ef9e-4754-aef3-1b8ca1dd6dcb" />
+  <Project Path="WebAPI/WebAPI.csproj" />
+</Solution>

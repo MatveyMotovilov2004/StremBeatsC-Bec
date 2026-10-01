@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_namespace = "Music.Grpc.Moderation";
+
+package music_business;
+
+service TrackGrpcService {
+	rpc DeletePlatformAlbum (DeletePlatformAlbumRequest) returns (DeletePlatformAlbumRespounse);
+
+	rpc DeletePlatformPlaylist (DeletePlatformPlaylistRequest) returns (DeletePlatformPlaylistRespounse);
+
+	rpc DeleteTrackPlatform (DeleteTrackPlatformRequest) returns (DeleteTrackPlatformRespounse);
+}
+
+message DeletePlatformAlbumRequest {
+
+}
+message DeletePlatformAlbumRespounse {
+
+}
+
+message DeletePlatformPlaylistRequest {
+
+}
+message DeletePlatformPlaylistRespounse {
+
+}
+
+message DeleteTrackPlatformRequest {
+
+}
+message DeleteTrackPlatformRespounse {
+
+}

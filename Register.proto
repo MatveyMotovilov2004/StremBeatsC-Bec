@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "Register";
+
+package music_business;
+
+service RegisterGrpcServise{
+    rpc RegisterUser (RegisterUserRequest) returns (RegisterUserRespounse);
+
+    rpc RegisterArtist (RegisterArtistRequest) returns (RegisterArtistRespounse);
+}
+
+message RegisterUserRequest{
+    string email = 1;
+    string PasswordHash = 2;
+}
+message RegisterUserRespounse{
+    int32 user_id = 1;
+    string email = 2;
+    optional string username = 3;
+    
+    string access_token = 4;
+    string refresh_token = 5;
+}
+
+message RegisterArtistRequest{
+
+}
+message RegisterArtistRespounse{
+
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Новый профиль",
+    "Projects": [
+      {
+        "Path": "MusicBusinessService\\MusicBusinessService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "WebAPI\\WebAPI.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

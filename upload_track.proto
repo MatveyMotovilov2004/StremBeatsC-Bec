@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "UploadTrack";
+
+package go_striming;
+
+service UploadTrackGrpcService {
+	rpc UploadTrack (UploadTrackRequest) returns (UploadTrackResponse);
+}
+
+message UploadTrackRequest {
+	string file_name = 1;
+    string content_type = 2;
+    bytes file = 3;
+}
+
+message UploadTrackResponse {
+    int32 file_id = 1;
+    int32 duration = 2;
+}
+

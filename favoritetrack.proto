@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "Music.Grpc.FavoriteTrack";
+
+package misic_business;
+
+service FavoriteTrackGrpcService{
+	rpc AddLikedTrack (AddLikedTrackRequest) returns (AddLikedTrackRespounse);
+
+	rpc DeleteLikeTrack (DeleteLikeTrackRequest) returns (DeleteLikeTrackRespounse);
+}
+
+message AddLikeTrackRequest {
+
+}
+message AddLikedTrackRespounse {
+
+}
+
+message DeleteLikeTrackRequest {
+
+}
+message DeleteLikeTrackRespounse {
+
+}

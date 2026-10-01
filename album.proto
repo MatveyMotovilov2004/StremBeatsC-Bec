@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_mamespace = "Music.Grps.Album";
+
+package music_business;
+
+service AlbumGrpsService{
+	rpc AddAlbum (AddAlbumRequest) returns (AddAlbumRespounse);
+
+	rpc	CreateAlbum (CreateAlbumRequest) returns (CreateAlbumRespounse);
+
+	rpc DeleteAlbum (DeleteAlbumRequest) returns (DeleteAlbumRespounse);
+}
+
+message AddAlbumRequest{
+
+}
+message AddAlbumRespounse{
+
+}
+
+message CreateAlbumRequest{
+
+}
+message CreateAlbumRespounse{
+
+}
+
+message DeleteAlbumRequest{
+
+}
+message DeleteAlbumRespounse{
+
+}

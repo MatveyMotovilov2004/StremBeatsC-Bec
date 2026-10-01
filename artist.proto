@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "Music.Grpc.Artist";
+
+package music_business;	
+
+service ArtistGrpcService{
+	rpc DeleteArtist (DeleteArtistRequest) returns (DeleteArtistRespounse);
+
+	rpc UpdateProfile (UpdateProfileRequest) returns (UpdateProfileResponse);
+}
+
+message DeleteArtistRequest{
+
+}
+message DeleteArtistRespounse{
+
+}
+
+message UpdateProfileRequest{
+
+}
+message UpdateProfilePesponse{
+
+}

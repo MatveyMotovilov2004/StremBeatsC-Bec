@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option charp_namespace = "Music.Grpc.Search";
+
+package misic_business;
+
+service SearchGrpcService{
+	rpc Search (SearchRequest) returns (SearchRespounse);
+}
+
+message SearchRequest {
+
+}
+message SearchRespounse {
+
+}

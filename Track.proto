@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "Tracks";
+
+package music_business;
+
+service TrackGrpcService {
+	rpc CreateTrack (CreateTrackRequest) returns (CreateTrackResponse);
+
+	rpc DeleteTrack (DeleteTrackRequest) returns (DeleteTrackResponse);
+}
+
+message CreateTrackRequest {
+	string title = 1;
+	int32 albumId = 2;
+	int32 duration = 3;
+	int32 fileId = 4;
+	int32 playCount = 5;
+
+}
+message CreateTrackResponse {
+	int32 id = 1;         // Возвращаем ID созданного трека
+	string status = 2;
+}
+
+// --- КОРОБКИ ДЛЯ МЕТОДА 2 (УДАЛЕНИЕ) ---
+message DeleteTrackRequest {
+	int32 id = 1;         // Для удаления нужен только ID
+}
+message DeleteTrackResponse {
+	bool is_success = 1;  // Возвращаем флаг: удалилось или нет
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Music.Grpc.Authorize";
+
+package music_business;
+
+service AuthorizeGrpcService{
+	rpc Authorize (AuthorizeRequest) returns (AuthorizeRespounse);
+}
+
+message AuthorizeRequest{
+
+}
+message AuthorizePesponse{
+
+}
