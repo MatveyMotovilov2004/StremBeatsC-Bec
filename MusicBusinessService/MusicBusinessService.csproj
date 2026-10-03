@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>8341f6da-ac82-43c7-953a-8ecf93a20cd3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,16 +23,17 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
     <PackageReference Include="Scrutor" Version="7.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.23.0" />
   </ItemGroup>
 
 	<ItemGroup>
 		<Protobuf Include="..\Track.proto" GrpcServices="Server" />
 		<Protobuf Include="..\Register.proto" GrpcServices="Server" />
+		<Protobuf Include="..\RefreshToken.proto" GrpcServices="Server" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Modules\Identity\Application\Login\" />
-	  <Folder Include="Modules\Identity\Application\RefreshToken\" />
 	  <Folder Include="Services\" />
 	</ItemGroup>
 	

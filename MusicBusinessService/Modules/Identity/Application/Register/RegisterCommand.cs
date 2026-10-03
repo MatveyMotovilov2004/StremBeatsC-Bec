@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using Register;
 
 namespace Identity.Application.Register;
 
 public record class RegisterCommand
-    (string email, string passwordHash) : IRequest<int>;
+    (string userName, string email, string passwordHash) 
+    : IRequest<RegisterUserRespounse>;
 

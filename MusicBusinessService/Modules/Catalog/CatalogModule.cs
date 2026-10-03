@@ -9,8 +9,9 @@ public static class CatalogModule
     public static IServiceCollection AddCatalogModule(
         this IServiceCollection services,IConfiguration configuration)
     {
+        // было GetConnectionString("CatalogDbContext")
         services.AddDbContext<CatalogDbContext>(option =>
-            option.UseNpgsql(configuration.GetConnectionString("CatalogDbContext"))
+            option.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
             .UseSnakeCaseNamingConvention());
 
         services.AddMediatR(cfg =>
@@ -18,42 +19,9 @@ public static class CatalogModule
             cfg.RegisterServicesFromAssembly(
                 typeof(ICatalogHandler).Assembly);
         });
-        //var catalogHandlers = typeof(ICatalogHandler)
-        //.Assembly
-        //.GetTypes()
-        //.Where(type =>
-        //    type.IsClass &&
-        //    !type.IsAbstract &&
-        //    typeof(ICatalogHandler).IsAssignableFrom(type));
-
-        //foreach (var handler in catalogHandlers)
-        //{
-        //    var mediatRInterfaces = handler
-        //        .GetInterfaces()
-        //        .Where(i =>
-        //            i.IsGenericType &&
-        //            (
-        //                i.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
-        //                i.GetGenericTypeDefinition() == typeof(IRequestHandler<>)
-        //            ));
-
-        //    foreach (var mediatRInterface in mediatRInterfaces)
-        //    {
-        //        services.AddScoped(mediatRInterface, handler);
-        //    }
-        //}
-
-        //services.AddScoped<IMediator, Mediator>();
-
-        //services.Scan(scan => scan
-        //    .FromAssemblyOf<ICatalogHandler>()
-        //    .AddClasses(c => c.AssignableTo<ICatalogHandler>())
-        //    .AsImplementedInterfaces()
-        //    .WithScopedLifetime());
-
+        
         return services;
     }
-        
 }
     
 

@@ -6,13 +6,15 @@ namespace Identity.Infrastructure.Persistence;
 
 public class IdentityDbContext : DbContext
 {
-    public DbSet<User> User => Set<User>();
+    public DbSet<User> user => Set<User>();
+    public DbSet<RefreshToken> refreshTokens => Set<RefreshToken>();
 
     public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
         : base(options) { }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
 
         base.OnModelCreating(modelBuilder);
     }

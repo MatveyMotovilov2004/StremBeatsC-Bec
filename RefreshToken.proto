@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "RefreshTokenGrpc";
+
+package music_business;
+
+service RefreshTokenGrpcServise{
+    rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenRespounse);
+}
+
+message RefreshTokenRequest{
+    string refresh_token = 1;
+}
+message RefreshTokenRespounse{
+    string access_token = 1;
+    string refresh_token = 2;
+}

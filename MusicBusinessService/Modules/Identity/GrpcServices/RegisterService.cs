@@ -4,7 +4,7 @@ using Identity.Application.Register;
 using Register;
 //using User;
 
-namespace MusicBusinessService.Modules.Identity.GrpcServices
+namespace Identity.GrpcServices
 {
     public class RegisterService : RegisterGrpcServise.RegisterGrpcServiseBase
     {
@@ -18,15 +18,10 @@ namespace MusicBusinessService.Modules.Identity.GrpcServices
         public override async Task<RegisterUserRespounse> RegisterUser
             (RegisterUserRequest request, ServerCallContext context)
         {
-            var result = await _mediator.Send(
+            return await _mediator.Send(
                 new RegisterCommand(
-                    request.Email, request.PasswordHash
+                    request.Username, request.Email, request.PasswordHash
             ));
-            return new RegisterUserRespounse
-            {
-                //UserId = result.id,
-
-            };
         }
     }
 }

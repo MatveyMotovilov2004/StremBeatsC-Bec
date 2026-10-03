@@ -6,6 +6,7 @@
     <File Path="favoritetrack.proto" />
     <File Path="moderation.proto" />
     <File Path="playlist.proto" />
+    <File Path="RefreshToken.proto" />
     <File Path="Register.proto" />
     <File Path="search.proto" />
     <File Path="Track.proto" />

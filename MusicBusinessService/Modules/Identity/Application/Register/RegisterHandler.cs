@@ -1,28 +1,47 @@
-﻿using Identity.Application.Register;
+﻿using Identity.Application;
+using Identity.Application.Register;
 using Identity.Domain;
 using Identity.Infrastructure.Persistence;
 using MediatR;
+using Register;
 
 
 namespace MusicBusinessService.Modules.Identity.Application.Register;
 
 public class RegisterHandler
-    : IRequestHandler<RegisterCommand, int>
+    : IRequestHandler<RegisterCommand, RegisterUserRespounse>
 {
     private readonly IdentityDbContext _db;
+    private readonly ITokenService _tokenService;
 
-    public RegisterHandler(IdentityDbContext db)
+    public RegisterHandler(
+        IdentityDbContext db,
+        ITokenService tokenService)
     {
         _db = db;
+        _tokenService = tokenService;
     }
-    public async Task<int> Handle(
+    public async Task<RegisterUserRespounse> Handle(
         RegisterCommand request, 
         CancellationToken ct)
     {
-        _db.Add(new User(
-            request.email, request.passwordHash));
+        var user = new User(
+            request.userName, request.email, request.passwordHash);
+        
+        _db.Add(user);
+
         await _db.SaveChangesAsync(ct);
 
-        return;
+        var accessToken = _tokenService.GenerateAccessToken(user);
+        var refreshToken = _tokenService.CreateRefreshToken();
+
+        return new RegisterUserRespounse
+        {
+            UserId = user.Id,
+            Email = user.Email,
+            Username = user.UserName,
+            AccessToken = accessToken,
+            RefreshToken = refreshToken
+        };
     }
 }
