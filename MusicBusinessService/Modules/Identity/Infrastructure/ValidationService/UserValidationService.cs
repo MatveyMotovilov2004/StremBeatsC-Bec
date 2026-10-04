@@ -13,15 +13,19 @@ public class UserValidationService : IUserValidationService
     {
         _db = db;
     }
-    public Task<bool> IsEmailAvailableAsync(
+    public async Task<bool> IsEmailAvailableAsync(
         string email, CancellationToken ct)
     {
-        return;
+        return !await _db.user
+            .AsNoTracking()
+            .AnyAsync( x => x.Email == email, ct);
     }
 
-    public Task<bool> IsUserNameAvailableAsync(
+    public async Task<bool> IsUserNameAvailableAsync(
         string userName, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        return !await _db.user
+            .AsNoTracking()
+            .AnyAsync(x => x.UserName == userName, ct);
     }
 }

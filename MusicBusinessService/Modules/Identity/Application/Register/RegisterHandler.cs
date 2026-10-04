@@ -13,20 +13,23 @@ public class RegisterHandler
 {
     private readonly IdentityDbContext _db;
     private readonly ITokenService _tokenService;
+    private readonly IUserRegistrationService _userRegistrationService;
 
     public RegisterHandler(
         IdentityDbContext db,
-        ITokenService tokenService)
+        ITokenService tokenService,
+        IUserRegistrationService userRegistrationService)
     {
         _db = db;
         _tokenService = tokenService;
+        _userRegistrationService = userRegistrationService;
     }
     public async Task<RegisterUserRespounse> Handle(
         RegisterCommand request, 
         CancellationToken ct)
     {
-        var user = new User(
-            request.userName, request.email, request.passwordHash);
+        var user = await _userRegistrationService.RegisterUserAsync(
+            request.userName, request.email, request.passwordHash, ct);
         
         _db.Add(user);
 

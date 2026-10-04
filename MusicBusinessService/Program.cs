@@ -1,5 +1,6 @@
 using Catalog.Infrastructure.Persistence;
 using Identity.Application;
+using Identity.Application.Register;
 using Identity.GrpcServices;
 using Identity.Infrastructure;
 using Identity.Infrastructure.ValidationService;
@@ -32,6 +33,7 @@ public class Program
         builder.Services.AddScoped<ITokenService, TokenService>();
 
         builder.Services.AddScoped<IUserValidationService, UserValidationService>();
+        builder.Services.AddScoped<IUserRegistrationService, UserRegistrationService>();
 
         var app = builder.Build();
 
