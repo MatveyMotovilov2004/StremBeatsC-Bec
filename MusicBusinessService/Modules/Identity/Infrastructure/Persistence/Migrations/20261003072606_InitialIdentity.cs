@@ -29,6 +29,18 @@ namespace MusicBusinessService.Migrations.IdentityDb
                     table.PrimaryKey("pk_user", x => x.id);
                 });
 
+            migrationBuilder.CreateIndex(
+                name: "user_username_key",
+                table: "user",
+                column: "user_name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "user_email_key",
+                table: "user",
+                column: "email",
+                unique: true);
+
             migrationBuilder.CreateTable(
                 name: "refresh_tokens",
                 columns: table => new
@@ -61,6 +73,14 @@ namespace MusicBusinessService.Migrations.IdentityDb
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropIndex(
+                name: "user_username_key",
+                table: "user");
+
+            migrationBuilder.DropIndex(
+                name: "user_email_key",
+                table: "user");
+
             migrationBuilder.DropTable(
                 name: "refresh_tokens");
 

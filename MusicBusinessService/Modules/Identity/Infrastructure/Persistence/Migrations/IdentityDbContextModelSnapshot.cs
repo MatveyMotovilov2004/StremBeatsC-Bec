@@ -101,6 +101,14 @@ namespace MusicBusinessService.Migrations.IdentityDb
                     b.HasKey("Id")
                         .HasName("pk_user");
 
+                    b.HasIndex("UserName")
+                        .IsUnique()
+                        .HasDatabaseName("user_username_key");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasDatabaseName("user_email_key");
+
                     b.ToTable("user", (string)null);
                 });
 

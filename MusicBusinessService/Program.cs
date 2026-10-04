@@ -1,14 +1,15 @@
-using MusicBusinessService.Modules.Catalog;
+using Catalog.Infrastructure.Persistence;
+using Identity.Application;
+using Identity.GrpcServices;
+using Identity.Infrastructure;
+using Identity.Infrastructure.ValidationService;
+using Microsoft.EntityFrameworkCore;
 using Modules.Moderation;
 using Modules.Playlist;
 using Modules.Social;
-using Catalog.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
+using MusicBusinessService.Modules.Catalog;
 using MusicBusinessService.Modules.Catalog.GrpcServices;
-using Identity.Application;
 using MusicBusinessService.Modules.Identity.Infrastructure.Authentication;
-using Identity.Infrastructure;
-using Identity.GrpcServices;
 
 namespace MusicBusinessService;
 
@@ -29,6 +30,8 @@ public class Program
             .Bind(jwtOptions);
         builder.Services.AddSingleton(jwtOptions);
         builder.Services.AddScoped<ITokenService, TokenService>();
+
+        builder.Services.AddScoped<IUserValidationService, UserValidationService>();
 
         var app = builder.Build();
 
