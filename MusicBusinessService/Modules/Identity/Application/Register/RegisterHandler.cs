@@ -14,6 +14,7 @@ public class RegisterHandler
     private readonly IdentityDbContext _db;
     private readonly ITokenService _tokenService;
     private readonly IUserRegistrationService _userRegistrationService;
+    private readonly IPasswordServise _passwordServise;
 
     public RegisterHandler(
         IdentityDbContext db,
@@ -28,7 +29,7 @@ public class RegisterHandler
         RegisterCommand request, CancellationToken ct)
     {
         var user = await _userRegistrationService.RegisterUserAsync(
-            request.userName, request.email, request.passwordHash, ct);
+            request.userName, request.email, request.password, ct);
         
         _db.Add(user);
 

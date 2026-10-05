@@ -6,15 +6,19 @@ namespace Identity.Application.Register;
 public class UserRegistrationService : IUserRegistrationService
 {
     private readonly IUserValidationService _userValidationService;
+    private readonly IPasswordServise _passwordServise;
 
-    public UserRegistrationService(IUserValidationService userValidationService)
+    public UserRegistrationService(
+        IUserValidationService userValidationService,
+        IPasswordServise passwordServise)
     {
         _userValidationService = userValidationService;
+        _passwordServise = passwordServise;
     }
     public async Task<User> RegisterUserAsync(
         string userName, 
         string email, 
-        string passwordHash, 
+        string password, 
         CancellationToken ct)
     {
         if (!await _userValidationService.IsEmailAvailableAsync(
@@ -30,6 +34,9 @@ public class UserRegistrationService : IUserRegistrationService
             throw new InvalidOperationException(
             "User with this username already exists.");
         }
+
+        var passwordHash = _passwordServise.Hash(password);
+
         return new User(
             userName,
             email,

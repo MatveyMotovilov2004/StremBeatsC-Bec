@@ -13,7 +13,7 @@ service RegisterGrpcServise{
 message RegisterUserRequest{
     string username = 1;
     string email = 2;
-    string PasswordHash = 3;
+    string Password = 3;
 }
 message RegisterUserRespounse{
     int32 user_id = 1;

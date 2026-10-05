@@ -20,7 +20,7 @@ namespace Identity.GrpcServices
         {
             return await _mediator.Send(
                 new RegisterCommand(
-                    request.Username, request.Email, request.PasswordHash
+                    request.Username, request.Email, request.Password
             ));
         }
     }

@@ -3,6 +3,7 @@ using Identity.Application;
 using Identity.Application.Register;
 using Identity.GrpcServices;
 using Identity.Infrastructure;
+using Identity.Infrastructure.Authentication;
 using Identity.Infrastructure.ValidationService;
 using Microsoft.EntityFrameworkCore;
 using Modules.Moderation;
@@ -34,6 +35,7 @@ public class Program
 
         builder.Services.AddScoped<IUserValidationService, UserValidationService>();
         builder.Services.AddScoped<IUserRegistrationService, UserRegistrationService>();
+        builder.Services.AddScoped<IPasswordServise, PasswordService>();
 
         var app = builder.Build();
 
