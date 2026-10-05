@@ -25,19 +25,28 @@ public class RegisterHandler
         _userRegistrationService = userRegistrationService;
     }
     public async Task<RegisterUserRespounse> Handle(
-        RegisterCommand request, 
-        CancellationToken ct)
+        RegisterCommand request, CancellationToken ct)
     {
         var user = await _userRegistrationService.RegisterUserAsync(
             request.userName, request.email, request.passwordHash, ct);
         
         _db.Add(user);
 
-        await _db.SaveChangesAsync(ct);
-
         var accessToken = _tokenService.GenerateAccessToken(user);
-        var refreshToken = _tokenService.CreateRefreshToken();
+        var refreshToken = _tokenService.GenerateRefreshToken();
+        // было UserId = user.Id
+        var refreshTokenEntity = new RefreshToken
+        {
+            User = user,
+            Token = refreshToken,
+            ExpiresAt = DateTime.UtcNow.AddDays(30),
+            IsRevoked = false,
+            CreatedAt = DateTime.UtcNow
+        };
 
+        _db.Add(refreshTokenEntity);
+        await _db.SaveChangesAsync(ct);
+        
         return new RegisterUserRespounse
         {
             UserId = user.Id,

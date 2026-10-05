@@ -1,5 +1,5 @@
 ﻿using Grpc.Core;
-using Identity.Application.RefreshToken;
+using Identity.Application;
 using MediatR;
 using RefreshTokenGrpc;
 

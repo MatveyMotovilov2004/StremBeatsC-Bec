@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using RefreshTokenGrpc;
 
-namespace Identity.Application.RefreshToken;
+namespace Identity.Application;
 
-public class RefreshTokenCommand(string RefreshToken)
+public record RefreshTokenCommand(string refreshToken)
     : IRequest<RefreshTokenRespounse>;
 

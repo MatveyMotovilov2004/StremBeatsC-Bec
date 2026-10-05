@@ -1,4 +1,5 @@
-﻿using Register;
+﻿using RefreshTokenGrpc;
+using Register;
 using Tracks;
 using UploadTrack;
 
@@ -12,11 +13,14 @@ public static class GrpcClientRegistration
         const string address = "https://localhost:7298";
 
         services
-            .AddGrpcClient<TrackGrpcService.TrackGrpcServiceClient>(o =>
-                o.Address = new Uri(address));
+            .AddGrpcClient<TrackGrpcService.TrackGrpcServiceClient>(
+            o => o.Address = new Uri(address));
         services
-            .AddGrpcClient<RegisterGrpcServise.RegisterGrpcServiseClient>(o =>
-                o.Address = new Uri(address));
+            .AddGrpcClient<RegisterGrpcServise.RegisterGrpcServiseClient>(
+            o => o.Address = new Uri(address));
+        services
+            .AddGrpcClient<RefreshTokenGrpcServise.RefreshTokenGrpcServiseClient>(
+            o => o.Address = new Uri(address));
 
         return services;
     }

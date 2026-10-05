@@ -5,9 +5,9 @@ namespace Identity.Domain;
 public class User
 {
     public int Id { get; private set; }
-    public string UserName { get; private set; }
-    public string Email { get; private set; }
-    public string PasswordHash { get; private set; }
+    public string UserName { get; private set; } = null!;
+    public string Email { get; private set; } = null!;
+    public string PasswordHash { get; private set; } = null!;
     public DateTime CreatedAt { get; private set; }
     public DateTime? DeletedAt { get; private set; }
     public ICollection<RefreshToken> RefreshTokens { get; set; }

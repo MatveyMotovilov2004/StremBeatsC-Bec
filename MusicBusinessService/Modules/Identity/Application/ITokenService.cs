@@ -5,5 +5,5 @@ namespace Identity.Application;
 public interface ITokenService
 {
     string GenerateAccessToken(User user);
-    string CreateRefreshToken();
+    string GenerateRefreshToken();
 }

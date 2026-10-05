@@ -29,6 +29,7 @@
 		<Protobuf Include="..\Track.proto" GrpcServices="Client" />
 		<Protobuf Include="..\upload_track.proto" GrpcServices="Client" />
 		<Protobuf Include="..\Register.proto" GrpcServices="Client" />
+		<Protobuf Include="..\RefreshToken.proto" GrpcServices="Client" />
 	</ItemGroup>
 
 	

@@ -49,7 +49,7 @@ namespace MusicBusinessService.Modules.Identity.Infrastructure.Authentication
             return new JwtSecurityTokenHandler()
                 .WriteToken(token);
         }
-        public string CreateRefreshToken()
+        public string GenerateRefreshToken()
         {
             var bytes = RandomNumberGenerator.GetBytes(64);
 
