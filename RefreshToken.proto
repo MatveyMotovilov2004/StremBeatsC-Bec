@@ -5,13 +5,13 @@ option csharp_namespace = "RefreshTokenGrpc";
 package music_business;
 
 service RefreshTokenGrpcServise{
-    rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenRespounse);
+    rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
 }
 
 message RefreshTokenRequest{
     string refresh_token = 1;
 }
-message RefreshTokenRespounse{
+message RefreshTokenResponse{
     string access_token = 1;
     string refresh_token = 2;
 }

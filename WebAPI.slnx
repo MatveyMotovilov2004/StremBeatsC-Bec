@@ -2,6 +2,7 @@
   <Folder Name="/Protos/">
     <File Path="album.proto" />
     <File Path="artist.proto" />
+    <File Path="authentication.proto" />
     <File Path="authorize.proto" />
     <File Path="favoritetrack.proto" />
     <File Path="moderation.proto" />

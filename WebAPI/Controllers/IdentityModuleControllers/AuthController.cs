@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using AuthenticationGrpc;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using RefreshTokenGrpc;
 using Register;
+
 
 namespace WebAPI.Controllers.IdentityModuleControllers;
 
@@ -11,12 +13,15 @@ public class AuthController : ControllerBase
 {
     private readonly RegisterGrpcServise.RegisterGrpcServiseClient  _mbsRegisterClient;
     private readonly RefreshTokenGrpcServise.RefreshTokenGrpcServiseClient _mbsRefreshTokenClient;
+    private readonly AuthenticationGrpcService.AuthenticationGrpcServiceClient _mbcAuthenticationClient;
     public AuthController(
         RegisterGrpcServise.RegisterGrpcServiseClient mbsRegisterClient,
-        RefreshTokenGrpcServise.RefreshTokenGrpcServiseClient mbsRefreshTokenClient)
+        RefreshTokenGrpcServise.RefreshTokenGrpcServiseClient mbsRefreshTokenClient,
+        AuthenticationGrpcService.AuthenticationGrpcServiceClient mbcAuthenticationClient)
     {
         _mbsRegisterClient = mbsRegisterClient;
         _mbsRefreshTokenClient = mbsRefreshTokenClient;
+        _mbcAuthenticationClient = mbcAuthenticationClient;
     }
 
     [HttpPost("register")]
@@ -45,9 +50,19 @@ public class AuthController : ControllerBase
         httpHandler.ServerCertificateCustomValidationCallback =
             HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 
-        var respounse = await _mbsRefreshTokenClient.RefreshTokenAsync(
+        var response = await _mbsRefreshTokenClient.RefreshTokenAsync(
             request, cancellationToken: token);
 
-        return Ok(respounse);
+        return Ok(response);
     }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(
+        [FromBody] AuthenticationRequest request,
+        CancellationToken token)
+    {
+        var response = await _mbcAuthenticationClient.AuthenticationAsync(
+            request, cancellationToken: token);
+        return Ok();
+    } 
 }

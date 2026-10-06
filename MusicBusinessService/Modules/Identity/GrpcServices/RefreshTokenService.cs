@@ -13,7 +13,7 @@ public class RefreshTokenService
     {
         _mediator = mediator;
     }
-    public override async Task<RefreshTokenRespounse> RefreshToken(
+    public override async Task<RefreshTokenResponse> RefreshToken(
         RefreshTokenRequest request, ServerCallContext context)
     {
         return await _mediator.Send(

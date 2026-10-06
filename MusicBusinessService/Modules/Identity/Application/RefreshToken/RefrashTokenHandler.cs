@@ -7,7 +7,7 @@ using RefreshTokenGrpc;
 namespace Identity.Application;
 
 public class RefrashTokenHandler
-    : IRequestHandler<RefreshTokenCommand, RefreshTokenRespounse>
+    : IRequestHandler<RefreshTokenCommand, RefreshTokenResponse>
 {
     private readonly IdentityDbContext _db;
     private readonly ITokenService _tokenService;
@@ -19,15 +19,11 @@ public class RefrashTokenHandler
         _db = db;
         _tokenService = tokenService;
     }
-    public async Task<RefreshTokenRespounse> Handle(
+    public async Task<RefreshTokenResponse> Handle(
         RefreshTokenCommand request, CancellationToken ct)
     {
-        var storedRefreshToken = await _db.refreshTokens
-            .Include(a => a.User)
-            .FirstOrDefaultAsync(b => 
-                b.Token == request.refreshToken
-                && !b.IsRevoked 
-                && b.ExpiresAt > DateTime.UtcNow, ct);
+        var storedRefreshToken = await FindValidRefreshTokenAsync(
+            request.refreshToken, ct);
 
         if  (storedRefreshToken is null)
             throw new InvalidOperationException("Refresh token not found.");
@@ -50,10 +46,21 @@ public class RefrashTokenHandler
         _db.Add(refreshTokenEntity);
         await _db.SaveChangesAsync(ct);
 
-        return new RefreshTokenRespounse
+        return new RefreshTokenResponse
         {
             AccessToken = accessToken,
             RefreshToken = refreshToken
         };
+    }
+
+    private async Task<RefreshToken?> FindValidRefreshTokenAsync(
+        string refreshToken, CancellationToken ct)
+    {
+        return await _db.refreshTokens
+            .Include(a => a.User)
+            .FirstOrDefaultAsync(b =>
+                b.Token == refreshToken
+                && !b.IsRevoked
+                && b.ExpiresAt > DateTime.UtcNow, ct);
     }
 }

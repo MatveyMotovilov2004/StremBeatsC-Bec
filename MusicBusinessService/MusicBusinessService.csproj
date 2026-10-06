@@ -30,10 +30,10 @@
 		<Protobuf Include="..\Track.proto" GrpcServices="Server" />
 		<Protobuf Include="..\Register.proto" GrpcServices="Server" />
 		<Protobuf Include="..\RefreshToken.proto" GrpcServices="Server" />
+		<Protobuf Include="..\Authentication.proto" GrpcService="Server" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Modules\Identity\Application\Login\" />
 	  <Folder Include="Services\" />
 	</ItemGroup>
 	

@@ -14,7 +14,6 @@ public class RegisterHandler
     private readonly IdentityDbContext _db;
     private readonly ITokenService _tokenService;
     private readonly IUserRegistrationService _userRegistrationService;
-    private readonly IPasswordServise _passwordServise;
 
     public RegisterHandler(
         IdentityDbContext db,
