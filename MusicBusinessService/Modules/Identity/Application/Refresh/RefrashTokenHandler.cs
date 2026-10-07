@@ -2,7 +2,7 @@
 using Identity.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using MusicBusinessService.Modules.Identity.Application.Services;
+using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
 using RefreshTokenGrpc;
 
 namespace Identity.Application;

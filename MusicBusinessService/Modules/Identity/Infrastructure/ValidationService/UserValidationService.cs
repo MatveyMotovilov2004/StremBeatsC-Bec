@@ -1,6 +1,6 @@
 ﻿using Identity.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using MusicBusinessService.Modules.Identity.Application.Services;
+using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
 
 namespace Identity.Infrastructure.ValidationService;
 

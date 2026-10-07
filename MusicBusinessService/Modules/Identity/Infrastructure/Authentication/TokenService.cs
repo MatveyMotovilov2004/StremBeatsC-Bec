@@ -1,7 +1,7 @@
 ﻿using Identity.Domain;
 
 using Microsoft.IdentityModel.Tokens;
-using MusicBusinessService.Modules.Identity.Application.Services;
+using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;

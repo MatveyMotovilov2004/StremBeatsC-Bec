@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using MusicBusinessService.Modules.Identity.Application.Services;
+using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
 
 namespace Identity.Infrastructure.Authentication;
 

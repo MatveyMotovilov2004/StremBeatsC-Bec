@@ -1,6 +1,7 @@
-﻿using Identity.Infrastructure.Authentication;
+﻿using Identity.Application.Services.InfrastructureContract;
+using Identity.Infrastructure.Authentication;
 using Identity.Infrastructure.ValidationService;
-using MusicBusinessService.Modules.Identity.Application.Services;
+using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
 using MusicBusinessService.Modules.Identity.Infrastructure.Authentication;
 
 namespace Identity.Infrastructure.ServiceRegistration;
@@ -13,6 +14,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IUserValidationService, UserValidationService>();
         services.AddScoped<IPasswordServise, PasswordService>();
+        services.AddScoped<IUserReader, UserReader>();
 
         return services;
     }

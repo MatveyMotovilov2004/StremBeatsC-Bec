@@ -1,12 +1,11 @@
 ﻿using AuthenticationGrpc;
+using Identity.Application.Services.RefreshTokens.Contract;
+using Identity.Application.Services.Sessions.Contract;
 using Identity.Domain;
 using Identity.Infrastructure.Persistence;
 using MediatR;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-using MusicBusinessService.Modules.Identity.Application.Services;
-using RefreshTokenGrpc;
-using System.Reflection.Metadata;
+using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
 
 namespace Identity.Application.Login;
 
@@ -16,14 +15,20 @@ public class AuthenticationHandler
     private readonly IdentityDbContext _db;
     private readonly ITokenService _tokenService;
     private readonly IPasswordServise _passwordServise;
+    private readonly ISessionFactory _sessionFactory;
+    private readonly IRefreshTokenFactory _refreshTokenFactory;
     public AuthenticationHandler(
         IdentityDbContext db,
         ITokenService tokenService,
-        IPasswordServise passwordServise)
+        IPasswordServise passwordServise,
+        ISessionFactory sessionFactory,
+        IRefreshTokenFactory refreshTokenFactory)
     {
         _db = db;
         _tokenService = tokenService;
         _passwordServise = passwordServise;
+        _sessionFactory = sessionFactory;
+        _refreshTokenFactory = refreshTokenFactory;
     }
     public async Task<AuthenticationResponse> Handle(
         AuthenticationCommand request, CancellationToken ct)
@@ -39,27 +44,19 @@ public class AuthenticationHandler
         if (!isPasswordValid)
             throw new InvalidOperationException("Invalid credentials.");
 
-        
-
         var accessToken = _tokenService.GenerateAccessToken(user);
-        var refreshToken = _tokenService.GenerateRefreshToken();
+        var session = _sessionFactory.Create(user);
+        var refreshToken = _refreshTokenFactory.Create(session);
 
-        var refreshTokenEntity = new RefreshToken
-        {
-            //UserId = user.Id,
-            Token = refreshToken,
-            ExpiresAt = DateTime.UtcNow.AddDays(30),
-            IsRevoked = false,
-            CreatedAt = DateTime.UtcNow
-        };
-
-        _db.Add(refreshTokenEntity);
+        _db.Add(session);
+        _db.Add(refreshToken);
+ 
         await _db.SaveChangesAsync(ct);
 
         return new AuthenticationResponse
         {
             AccessToken = accessToken,
-            RefreshToken = refreshToken
+            RefreshToken = refreshToken.Token
         };
     }
 

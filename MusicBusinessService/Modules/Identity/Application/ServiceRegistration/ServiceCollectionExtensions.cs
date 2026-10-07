@@ -1,9 +1,11 @@
 ﻿using Identity.Application.Register;
+using Identity.Application.Services.Authentication.Contract;
+using Identity.Application.Services.Authentication.Implementation;
 using Identity.Application.Services.RefreshTokens.Contract;
 using Identity.Application.Services.RefreshTokens.Implementation;
 using Identity.Application.Services.Sessions.Contract;
 using Identity.Application.Services.Sessions.Implementation;
-using MusicBusinessService.Modules.Identity.Application.Services;
+using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
 
 namespace Identity.Application.DependencyInjection;
 
@@ -15,6 +17,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUserCreationService, UserCreationService>();
         services.AddScoped<ISessionFactory, SessionFactory>();
         services.AddScoped<IRefreshTokenFactory, RefreshTokenFactory>();
+        services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
 
         return services;
     }
