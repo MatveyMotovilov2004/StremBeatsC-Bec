@@ -10,6 +10,7 @@ using System.Reflection.Metadata;
 namespace Identity.Application.Login;
 
 public class AuthenticationHandler
+    : IRequestHandler<AuthenticationCommand, AuthenticationResponse>
 {
     private readonly IdentityDbContext _db;
     private readonly ITokenService _tokenService;
@@ -24,15 +25,15 @@ public class AuthenticationHandler
         _passwordServise = passwordServise;
     }
     public async Task<AuthenticationResponse> Handle(
-        AuthenticationRequest request, CancellationToken ct)
+        AuthenticationCommand request, CancellationToken ct)
     {
-        var user = await SearchUserByEmail(request.Email, ct);
+        var user = await SearchUserByEmail(request.email, ct);
 
         if (user is null)
             throw new InvalidOperationException("Invalid credentials.");
 
         var isPasswordValid = _passwordServise.Verify(
-            request.Password, user.PasswordHash);
+            request.password, user.PasswordHash);
 
         if (!isPasswordValid)
             throw new InvalidOperationException("Invalid credentials.");

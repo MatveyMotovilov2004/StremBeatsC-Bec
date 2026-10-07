@@ -63,6 +63,6 @@ public class AuthController : ControllerBase
     {
         var response = await _mbcAuthenticationClient.AuthenticationAsync(
             request, cancellationToken: token);
-        return Ok();
+        return Ok(response);
     } 
 }

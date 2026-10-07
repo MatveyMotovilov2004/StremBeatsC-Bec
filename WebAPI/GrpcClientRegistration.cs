@@ -1,4 +1,5 @@
-﻿using RefreshTokenGrpc;
+﻿using AuthenticationGrpc;
+using RefreshTokenGrpc;
 using Register;
 using Tracks;
 using UploadTrack;
@@ -21,7 +22,9 @@ public static class GrpcClientRegistration
         services
             .AddGrpcClient<RefreshTokenGrpcServise.RefreshTokenGrpcServiseClient>(
             o => o.Address = new Uri(address));
-
+        services
+            .AddGrpcClient<AuthenticationGrpcService.AuthenticationGrpcServiceClient>(
+            o => o.Address = new Uri(address));
         return services;
     }
 
