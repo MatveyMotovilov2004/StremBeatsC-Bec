@@ -1,14 +1,7 @@
-using Catalog.Infrastructure.Persistence;
-using Identity.Application;
-using Identity.Application.Register;
+using Identity.Application.DependencyInjection;
 using Identity.GrpcServices;
 using Identity.Infrastructure;
-using Identity.Infrastructure.Authentication;
-using Identity.Infrastructure.ValidationService;
-using Microsoft.EntityFrameworkCore;
-using Modules.Moderation;
-using Modules.Playlist;
-using Modules.Social;
+using Identity.Infrastructure.ServiceRegistration;
 using MusicBusinessService.Modules.Catalog;
 using MusicBusinessService.Modules.Catalog.GrpcServices;
 using MusicBusinessService.Modules.Identity.Infrastructure.Authentication;
@@ -31,11 +24,9 @@ public class Program
             .GetSection("Jwt")
             .Bind(jwtOptions);
         builder.Services.AddSingleton(jwtOptions);
-        builder.Services.AddScoped<ITokenService, TokenService>();
 
-        builder.Services.AddScoped<IUserValidationService, UserValidationService>();
-        builder.Services.AddScoped<IUserRegistrationService, UserRegistrationService>();
-        builder.Services.AddScoped<IPasswordServise, PasswordService>();
+        builder.Services.AddIdentityApplication();
+        builder.Services.AddIdentityInfrastructure();
 
         var app = builder.Build();
 

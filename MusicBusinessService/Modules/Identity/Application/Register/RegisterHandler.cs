@@ -1,8 +1,10 @@
-﻿using Identity.Application;
-using Identity.Application.Register;
+﻿using Identity.Application.Register;
+using Identity.Application.Services.RefreshTokens.Contract;
+using Identity.Application.Services.Sessions.Contract;
 using Identity.Domain;
 using Identity.Infrastructure.Persistence;
 using MediatR;
+using MusicBusinessService.Modules.Identity.Application.Services;
 using Register;
 
 
@@ -13,38 +15,36 @@ public class RegisterHandler
 {
     private readonly IdentityDbContext _db;
     private readonly ITokenService _tokenService;
-    private readonly IUserRegistrationService _userRegistrationService;
+    private readonly IUserCreationService _userCreationService;
+    private readonly ISessionFactory _sessionFactory;
+    private readonly IRefreshTokenFactory _refreshTokenFactory;
 
     public RegisterHandler(
         IdentityDbContext db,
         ITokenService tokenService,
-        IUserRegistrationService userRegistrationService)
+        IUserCreationService userRegistrationService,
+        ISessionFactory sessionFactory,
+        IRefreshTokenFactory refreshTokenFactory)
     {
         _db = db;
         _tokenService = tokenService;
-        _userRegistrationService = userRegistrationService;
+        _userCreationService = userRegistrationService;
+        _sessionFactory = sessionFactory;
+        _refreshTokenFactory = refreshTokenFactory;
     }
     public async Task<RegisterUserRespounse> Handle(
         RegisterCommand request, CancellationToken ct)
     {
-        var user = await _userRegistrationService.RegisterUserAsync(
+        var user = await _userCreationService.CreateUserAsync(
             request.userName, request.email, request.password, ct);
-        
-        _db.Add(user);
-
+        var session = _sessionFactory.Create(user);
+        var refreshToken = _refreshTokenFactory.Create(session);
         var accessToken = _tokenService.GenerateAccessToken(user);
-        var refreshToken = _tokenService.GenerateRefreshToken();
-        // было UserId = user.Id
-        var refreshTokenEntity = new RefreshToken
-        {
-            User = user,
-            Token = refreshToken,
-            ExpiresAt = DateTime.UtcNow.AddDays(30),
-            IsRevoked = false,
-            CreatedAt = DateTime.UtcNow
-        };
 
-        _db.Add(refreshTokenEntity);
+        _db.Add(user);
+        _db.Add(session);
+        _db.Add(refreshToken);
+        
         await _db.SaveChangesAsync(ct);
         
         return new RegisterUserRespounse
@@ -53,7 +53,7 @@ public class RegisterHandler
             Email = user.Email,
             Username = user.UserName,
             AccessToken = accessToken,
-            RefreshToken = refreshToken
+            RefreshToken = refreshToken.Token
         };
     }
 }

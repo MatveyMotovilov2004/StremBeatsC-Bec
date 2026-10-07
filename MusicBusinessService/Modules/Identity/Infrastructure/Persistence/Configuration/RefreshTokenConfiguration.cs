@@ -10,7 +10,7 @@ public class RefreshTokenConfiguration
     public void Configure(EntityTypeBuilder<RefreshToken> builder)
     {
         builder.HasKey(a => a.Id);
-        builder.Property(a => a.UserId)
+        builder.Property(a => a.SessionId)
             .IsRequired();
         builder.Property(a => a.Token)
             .IsRequired();
@@ -20,9 +20,9 @@ public class RefreshTokenConfiguration
             .IsRequired();
         builder.Property(a => a.CreatedAt)
             .IsRequired();
-        builder.HasOne(a => a.User)
+        builder.HasOne(a => a.Session )
             .WithMany(b => b.RefreshTokens)
-            .HasForeignKey(c => c.UserId)
+            .HasForeignKey(c => c.SessionId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

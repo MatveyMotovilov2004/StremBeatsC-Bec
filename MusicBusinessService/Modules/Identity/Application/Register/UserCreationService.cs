@@ -1,21 +1,21 @@
-﻿using Identity.Application;
-using Identity.Domain;
+﻿using Identity.Domain;
+using MusicBusinessService.Modules.Identity.Application.Services;
 
 namespace Identity.Application.Register;
 
-public class UserRegistrationService : IUserRegistrationService
+public class UserCreationService : IUserCreationService
 {
     private readonly IUserValidationService _userValidationService;
     private readonly IPasswordServise _passwordServise;
 
-    public UserRegistrationService(
+    public UserCreationService(
         IUserValidationService userValidationService,
         IPasswordServise passwordServise)
     {
         _userValidationService = userValidationService;
         _passwordServise = passwordServise;
     }
-    public async Task<User> RegisterUserAsync(
+    public async Task<User> CreateUserAsync(
         string userName, 
         string email, 
         string password, 

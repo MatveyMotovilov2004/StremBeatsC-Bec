@@ -4,6 +4,7 @@ using Identity.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using MusicBusinessService.Modules.Identity.Application.Services;
 using RefreshTokenGrpc;
 using System.Reflection.Metadata;
 
@@ -45,7 +46,7 @@ public class AuthenticationHandler
 
         var refreshTokenEntity = new RefreshToken
         {
-            UserId = user.Id,
+            //UserId = user.Id,
             Token = refreshToken,
             ExpiresAt = DateTime.UtcNow.AddDays(30),
             IsRevoked = false,

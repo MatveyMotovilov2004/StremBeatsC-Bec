@@ -10,8 +10,8 @@ public class User
     public string PasswordHash { get; private set; } = null!;
     public DateTime CreatedAt { get; private set; }
     public DateTime? DeletedAt { get; private set; }
-    public ICollection<RefreshToken> RefreshTokens { get; set; }
-        = new List<RefreshToken>();
+    public ICollection<Session> Sessions { get; set; }
+        = new List<Session>();
 
     private User() { }
 

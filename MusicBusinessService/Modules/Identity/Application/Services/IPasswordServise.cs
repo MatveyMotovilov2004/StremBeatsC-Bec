@@ -1,4 +1,4 @@
-﻿namespace Identity.Application;
+﻿namespace MusicBusinessService.Modules.Identity.Application.Services;
 
 public interface IPasswordServise
 {

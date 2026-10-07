@@ -12,13 +12,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(a => a.UserName)
             .IsRequired()
             .HasMaxLength(30);
-        builder.HasIndex(a => a.UserName)
-            .IsUnique();
         builder.Property(a => a.Email)
             .IsRequired()
             .HasMaxLength(255);
-        builder.HasIndex(a => a.Email)
-            .IsUnique();
         builder.Property(a => a.PasswordHash)
             .IsRequired()
             .HasMaxLength(255);
@@ -27,5 +23,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired();
         builder.Property(a => a.DeletedAt)
             .IsRequired(false);
+        builder.HasIndex(a => a.UserName)
+            .IsUnique()
+            .HasDatabaseName("user_username_key");
+        builder.HasIndex(a => a.Email)
+            .IsUnique()
+            .HasDatabaseName("user_email_key");
     }
 }
