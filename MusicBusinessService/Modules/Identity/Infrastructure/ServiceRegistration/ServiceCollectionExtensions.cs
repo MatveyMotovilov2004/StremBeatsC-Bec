@@ -15,6 +15,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUserValidationService, UserValidationService>();
         services.AddScoped<IPasswordServise, PasswordService>();
         services.AddScoped<IUserReader, UserReader>();
+        services.AddScoped<IRefreshTokenReader, RefreshTokenReader>();
 
         return services;
     }

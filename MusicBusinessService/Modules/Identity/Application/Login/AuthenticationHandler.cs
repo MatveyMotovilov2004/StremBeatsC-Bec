@@ -1,10 +1,9 @@
 ﻿using AuthenticationGrpc;
+using Identity.Application.Services.Authentication.Contract;
 using Identity.Application.Services.RefreshTokens.Contract;
 using Identity.Application.Services.Sessions.Contract;
-using Identity.Domain;
 using Identity.Infrastructure.Persistence;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
 
 namespace Identity.Application.Login;
@@ -14,35 +13,27 @@ public class AuthenticationHandler
 {
     private readonly IdentityDbContext _db;
     private readonly ITokenService _tokenService;
-    private readonly IPasswordServise _passwordServise;
+    private readonly IUserAuthenticationService _userAuthenticationService;
     private readonly ISessionFactory _sessionFactory;
     private readonly IRefreshTokenFactory _refreshTokenFactory;
     public AuthenticationHandler(
         IdentityDbContext db,
         ITokenService tokenService,
-        IPasswordServise passwordServise,
+        IUserAuthenticationService userAuthenticationService,
         ISessionFactory sessionFactory,
         IRefreshTokenFactory refreshTokenFactory)
     {
         _db = db;
         _tokenService = tokenService;
-        _passwordServise = passwordServise;
+        _userAuthenticationService = userAuthenticationService;
         _sessionFactory = sessionFactory;
         _refreshTokenFactory = refreshTokenFactory;
     }
     public async Task<AuthenticationResponse> Handle(
         AuthenticationCommand request, CancellationToken ct)
     {
-        var user = await SearchUserByEmail(request.email, ct);
-
-        if (user is null)
-            throw new InvalidOperationException("Invalid credentials.");
-
-        var isPasswordValid = _passwordServise.Verify(
-            request.password, user.PasswordHash);
-
-        if (!isPasswordValid)
-            throw new InvalidOperationException("Invalid credentials.");
+        var user = await _userAuthenticationService.AuthenticateAsync(
+            request.email, request.password, ct);
 
         var accessToken = _tokenService.GenerateAccessToken(user);
         var session = _sessionFactory.Create(user);
@@ -58,13 +49,5 @@ public class AuthenticationHandler
             AccessToken = accessToken,
             RefreshToken = refreshToken.Token
         };
-    }
-
-    private async Task<User?> SearchUserByEmail(
-        string email, CancellationToken ct)
-    {
-        return await _db.user
-            .FirstOrDefaultAsync(
-            x => x.Email == email, ct);
     }
 }

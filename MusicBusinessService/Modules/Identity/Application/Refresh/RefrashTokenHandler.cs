@@ -1,7 +1,6 @@
-﻿using Identity.Domain;
+﻿using Identity.Application.Services.RefreshTokens.Contract;
 using Identity.Infrastructure.Persistence;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
 using RefreshTokenGrpc;
 
@@ -12,56 +11,40 @@ public class RefrashTokenHandler
 {
     private readonly IdentityDbContext _db;
     private readonly ITokenService _tokenService;
-
+    private readonly IRefreshTokenFactory _refreshTokenFactory;
+    private readonly IRefreshTokenValidationServise _refreshTokenValidationServise;
     public RefrashTokenHandler(
         IdentityDbContext db,
-        ITokenService tokenService)
+        ITokenService tokenService,
+        IRefreshTokenFactory refreshTokenFactory,
+        IRefreshTokenValidationServise refreshTokenValidationServise)
     {
         _db = db;
         _tokenService = tokenService;
+        _refreshTokenFactory = refreshTokenFactory;
+        _refreshTokenValidationServise = refreshTokenValidationServise;
     }
     public async Task<RefreshTokenResponse> Handle(
         RefreshTokenCommand request, CancellationToken ct)
     {
-        //var storedRefreshToken = await FindValidRefreshTokenAsync(
-        //    request.refreshToken, ct);
+        var storedRefreshToken =
+            await _refreshTokenValidationServise.ValidateTokenAsync(
+                request.refreshToken, ct);
 
-        //if  (storedRefreshToken is null)
-        //    throw new InvalidOperationException("Refresh token not found.");
-        
-        //var accessToken = _tokenService.GenerateAccessToken(
-        //    storedRefreshToken.User);
-        //var refreshToken = _tokenService.GenerateRefreshToken();
+        storedRefreshToken.IsRevoked = true;
 
-        //storedRefreshToken.IsRevoked = true;
+        var refreshToken = _refreshTokenFactory.Create(
+            storedRefreshToken.Session);
+        var accessToken = _tokenService.GenerateAccessToken(
+            storedRefreshToken.Session.User);
 
-        //var refreshTokenEntity = new RefreshToken
-        //{
-        //    UserId = storedRefreshToken.UserId,
-        //    Token = refreshToken,
-        //    ExpiresAt = DateTime.UtcNow.AddDays(30),
-        //    IsRevoked = false,
-        //    CreatedAt = DateTime.UtcNow
-        //};
-
-        //_db.Add(refreshTokenEntity);
-        //await _db.SaveChangesAsync(ct);
+        _db.Add(refreshToken);
+        await _db.SaveChangesAsync(ct);
 
         return new RefreshTokenResponse
         {
-            //AccessToken = accessToken,
-            //RefreshToken = refreshToken
+            AccessToken = accessToken,
+            RefreshToken = refreshToken.Token
         };
     }
-
-    //private async Task<RefreshToken?> FindValidRefreshTokenAsync(
-    //    string refreshToken, CancellationToken ct)
-    //{
-    //    return await _db.refreshTokens
-    //        .Include(a => a.User)
-    //        .FirstOrDefaultAsync(b =>
-    //            b.Token == refreshToken
-    //            && !b.IsRevoked
-    //            && b.ExpiresAt > DateTime.UtcNow, ct);
-    //}
 }
