@@ -1,5 +1,4 @@
 ﻿using Identity.Domain;
-
 using Microsoft.IdentityModel.Tokens;
 using Identity.Application.Services.InfrastructureContract;
 using System.IdentityModel.Tokens.Jwt;

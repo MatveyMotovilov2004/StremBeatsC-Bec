@@ -9,6 +9,7 @@ public class IdentityDbContext : DbContext
     public DbSet<User> user => Set<User>();
     public DbSet<RefreshToken> refreshTokens => Set<RefreshToken>();
     public DbSet<Session> sessions => Set<Session>();
+    public DbSet<Role> roles => Set<Role>();
 
     public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
         : base(options) { }
@@ -17,6 +18,7 @@ public class IdentityDbContext : DbContext
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
         modelBuilder.ApplyConfiguration(new SessionConfiguration());
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
         base.OnModelCreating(modelBuilder);
     }

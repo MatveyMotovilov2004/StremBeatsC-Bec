@@ -1,7 +1,6 @@
 ﻿using Identity.Application.Services.Authentication.Contract;
 using Identity.Application.Services.InfrastructureContract;
 using Identity.Domain;
-using MediatR;
 
 namespace Identity.Application.Services.Authentication.Implementation;
 

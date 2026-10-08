@@ -1,8 +1,6 @@
 ﻿using Identity.Application.Services.InfrastructureContract;
 using Identity.Infrastructure.Authentication;
 using Identity.Infrastructure.ValidationService;
-//using Identity.Application.Services.InfrastructureContract;
-//using Identity.Infrastructure.Authentication;
 
 namespace Identity.Infrastructure.ServiceRegistration;
 
@@ -16,6 +14,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPasswordServise, PasswordService>();
         services.AddScoped<IUserReader, UserReader>();
         services.AddScoped<IRefreshTokenReader, RefreshTokenReader>();
+        services.AddScoped<IRoleReader, RoleReader>();
 
         return services;
     }

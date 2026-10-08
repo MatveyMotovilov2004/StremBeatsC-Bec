@@ -6,6 +6,7 @@ using Identity.Infrastructure.Persistence;
 using MediatR;
 using Identity.Application.Services.InfrastructureContract;
 using Register;
+using Identity.Application.Services.Users.Contract;
 
 
 namespace MusicBusinessService.Modules.Identity.Application.Register;

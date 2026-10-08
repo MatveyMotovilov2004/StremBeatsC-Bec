@@ -1,6 +1,6 @@
 ﻿using Identity.Domain;
 
-namespace Identity.Application.Services.InfrastructureContract;
+namespace Identity.Application.Services.Users.Contract;
 
 public interface IUserCreationService
 {
