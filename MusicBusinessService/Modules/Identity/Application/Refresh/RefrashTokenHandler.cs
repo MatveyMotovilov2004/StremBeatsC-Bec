@@ -1,7 +1,7 @@
 ﻿using Identity.Application.Services.RefreshTokens.Contract;
 using Identity.Infrastructure.Persistence;
 using MediatR;
-using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
+using Identity.Application.Services.InfrastructureContract;
 using RefreshTokenGrpc;
 
 namespace Identity.Application;

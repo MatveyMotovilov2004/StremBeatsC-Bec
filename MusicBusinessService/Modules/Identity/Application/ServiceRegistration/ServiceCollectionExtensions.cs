@@ -5,7 +5,7 @@ using Identity.Application.Services.RefreshTokens.Contract;
 using Identity.Application.Services.RefreshTokens.Implementation;
 using Identity.Application.Services.Sessions.Contract;
 using Identity.Application.Services.Sessions.Implementation;
-using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
+using Identity.Application.Services.InfrastructureContract;
 
 namespace Identity.Application.DependencyInjection;
 

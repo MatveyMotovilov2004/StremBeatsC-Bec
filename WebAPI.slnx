@@ -5,6 +5,7 @@
     <File Path="authentication.proto" />
     <File Path="authorize.proto" />
     <File Path="favoritetrack.proto" />
+    <File Path="logout.proto" />
     <File Path="moderation.proto" />
     <File Path="playlist.proto" />
     <File Path="RefreshToken.proto" />

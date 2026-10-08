@@ -4,7 +4,7 @@ using Identity.Infrastructure;
 using Identity.Infrastructure.ServiceRegistration;
 using MusicBusinessService.Modules.Catalog;
 using MusicBusinessService.Modules.Catalog.GrpcServices;
-using MusicBusinessService.Modules.Identity.Infrastructure.Authentication;
+using Identity.Infrastructure.Authentication;
 
 namespace MusicBusinessService;
 
@@ -35,6 +35,7 @@ public class Program
         app.MapGrpcService<RegisterService>();
         app.MapGrpcService<RefreshTokenService>();
         app.MapGrpcService<AuthenticationService>();
+        app.MapGrpcService<LogoutService>();
         app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 
         app.Run();

@@ -1,5 +1,7 @@
 ﻿using AuthenticationGrpc;
-using Microsoft.AspNetCore.Authentication;
+using LogoutGrpc;
+
+//using LogoutGrpc;
 using Microsoft.AspNetCore.Mvc;
 using RefreshTokenGrpc;
 using Register;
@@ -14,14 +16,18 @@ public class AuthController : ControllerBase
     private readonly RegisterGrpcServise.RegisterGrpcServiseClient  _mbsRegisterClient;
     private readonly RefreshTokenGrpcServise.RefreshTokenGrpcServiseClient _mbsRefreshTokenClient;
     private readonly AuthenticationGrpcService.AuthenticationGrpcServiceClient _mbcAuthenticationClient;
+    private readonly LogoutGrpcService.LogoutGrpcServiceClient _mbslogoutGrpcServiceClient;
     public AuthController(
         RegisterGrpcServise.RegisterGrpcServiseClient mbsRegisterClient,
         RefreshTokenGrpcServise.RefreshTokenGrpcServiseClient mbsRefreshTokenClient,
-        AuthenticationGrpcService.AuthenticationGrpcServiceClient mbcAuthenticationClient)
+        AuthenticationGrpcService.AuthenticationGrpcServiceClient mbsAuthenticationClient,
+        LogoutGrpcService.LogoutGrpcServiceClient mbslogoutGrpcServiceClient
+        )
     {
         _mbsRegisterClient = mbsRegisterClient;
         _mbsRefreshTokenClient = mbsRefreshTokenClient;
-        _mbcAuthenticationClient = mbcAuthenticationClient;
+        _mbcAuthenticationClient = mbsAuthenticationClient;
+        _mbslogoutGrpcServiceClient = mbslogoutGrpcServiceClient;
     }
 
     [HttpPost("register")]
@@ -64,5 +70,15 @@ public class AuthController : ControllerBase
         var response = await _mbcAuthenticationClient.AuthenticationAsync(
             request, cancellationToken: token);
         return Ok(response);
-    } 
+    }
+
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout(
+        [FromBody] LogoutRequest request,
+        CancellationToken token)
+    {
+        var response = await _mbslogoutGrpcServiceClient.LogoutAsync(
+            request, cancellationToken: token);
+        return Ok(response);
+    }
 }

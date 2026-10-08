@@ -1,5 +1,5 @@
 ﻿using Identity.Domain;
-using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
+using Identity.Application.Services.InfrastructureContract;
 
 namespace Identity.Application.Register;
 

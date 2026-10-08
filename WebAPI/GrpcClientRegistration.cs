@@ -3,6 +3,10 @@ using RefreshTokenGrpc;
 using Register;
 using Tracks;
 using UploadTrack;
+using LogoutGrpc;
+
+
+
 
 namespace WebAPI.GrpcClientRegistration;
 
@@ -24,6 +28,9 @@ public static class GrpcClientRegistration
             o => o.Address = new Uri(address));
         services
             .AddGrpcClient<AuthenticationGrpcService.AuthenticationGrpcServiceClient>(
+            o => o.Address = new Uri(address));
+        services
+            .AddGrpcClient<LogoutGrpcService.LogoutGrpcServiceClient>(
             o => o.Address = new Uri(address));
         return services;
     }

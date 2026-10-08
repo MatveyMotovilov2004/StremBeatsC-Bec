@@ -1,6 +1,6 @@
 ﻿using Identity.Domain;
 
-namespace MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
+namespace Identity.Application.Services.InfrastructureContract;
 
 public interface IUserCreationService
 {

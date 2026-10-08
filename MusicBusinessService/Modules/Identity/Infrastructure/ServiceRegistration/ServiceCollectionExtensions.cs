@@ -1,8 +1,8 @@
 ﻿using Identity.Application.Services.InfrastructureContract;
 using Identity.Infrastructure.Authentication;
 using Identity.Infrastructure.ValidationService;
-using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
-using MusicBusinessService.Modules.Identity.Infrastructure.Authentication;
+//using Identity.Application.Services.InfrastructureContract;
+//using Identity.Infrastructure.Authentication;
 
 namespace Identity.Infrastructure.ServiceRegistration;
 

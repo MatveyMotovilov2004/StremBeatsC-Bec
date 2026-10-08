@@ -4,7 +4,7 @@ using Identity.Application.Services.Sessions.Contract;
 using Identity.Domain;
 using Identity.Infrastructure.Persistence;
 using MediatR;
-using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
+using Identity.Application.Services.InfrastructureContract;
 using Register;
 
 

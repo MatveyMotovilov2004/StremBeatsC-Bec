@@ -2,7 +2,6 @@
 using Identity.Application.Services.InfrastructureContract;
 using Identity.Domain;
 using MediatR;
-using MusicBusinessService.Modules.Identity.Application.Services.InfrastructureContract;
 
 namespace Identity.Application.Services.Authentication.Implementation;
 

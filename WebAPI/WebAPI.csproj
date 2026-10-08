@@ -30,7 +30,8 @@
 		<Protobuf Include="..\upload_track.proto" GrpcServices="Client" />
 		<Protobuf Include="..\Register.proto" GrpcServices="Client" />
 		<Protobuf Include="..\RefreshToken.proto" GrpcServices="Client" />
-		<Protobuf Include="..\Authentication.proto" GrpcService="Client" />
+		<Protobuf Include="..\Authentication.proto" GrpcServices="Client" />
+		<Protobuf Include="..\logout.proto" GrpcServices="Client" />
 	</ItemGroup>
 
 	

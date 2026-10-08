@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option csharp_namespace = "LogoutGrpc";
+
+package music_business;
+
+service LogoutGrpcService{
+	rpc Logout (LogoutRequest) returns (LogoutResponse);
+}
+
+message LogoutRequest{
+	string refresh_token = 1;
+}
+message LogoutResponse{
+}
