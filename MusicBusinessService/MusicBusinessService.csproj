@@ -27,13 +27,13 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Protobuf Include="..\Track.proto" GrpcServices="Server" />
-		<Protobuf Include="..\Register.proto" GrpcServices="Server" />
-		<Protobuf Include="..\RefreshToken.proto" GrpcServices="Server" />
-		<Protobuf Include="..\Authentication.proto" GrpcServices="Server" />
-		<Protobuf Include="..\logout.proto" GrpcServices="Server" />
-		<Protobuf Include="..\give_role.proto" GrpcServices="Server" />
-		<Protobuf Include="..\artist.proto" GrpcSrvices="Server" />
+		<Protobuf Include="..\Protos\Track.proto" GrpcServices="Server" />
+		<Protobuf Include="..\Protos\Register.proto" GrpcServices="Server" />
+		<Protobuf Include="..\Protos\RefreshToken.proto" GrpcServices="Server" />
+		<Protobuf Include="..\Protos\Authentication.proto" GrpcServices="Server" />
+		<Protobuf Include="..\Protos\logout.proto" GrpcServices="Server" />
+		<Protobuf Include="..\Protos\give_role.proto" GrpcServices="Server" />
+		<Protobuf Include="..\Protos\artist.proto" GrpcSrvices="Server" />
 	</ItemGroup>
 
 	<ItemGroup>
