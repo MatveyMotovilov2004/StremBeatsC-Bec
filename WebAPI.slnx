@@ -5,6 +5,7 @@
     <File Path="authentication.proto" />
     <File Path="authorize.proto" />
     <File Path="favoritetrack.proto" />
+    <File Path="give_role.proto" />
     <File Path="logout.proto" />
     <File Path="moderation.proto" />
     <File Path="playlist.proto" />
@@ -15,6 +16,10 @@
     <File Path="upload_track.proto" />
     <File Path="user.proto" />
   </Folder>
+  <Folder Name="/Элементы решения/">
+    <File Path="global.json" />
+  </Folder>
   <Project Path="MusicBusinessService/MusicBusinessService.csproj" Id="a340f524-ef9e-4754-aef3-1b8ca1dd6dcb" />
+  <Project Path="WebApi.Tests/WebApi.Tests.csproj" Id="bfa12d4e-4481-4381-a04a-d759b5b48d4b" />
   <Project Path="WebAPI/WebAPI.csproj" />
 </Solution>

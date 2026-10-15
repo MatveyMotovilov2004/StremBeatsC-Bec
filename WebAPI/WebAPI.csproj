@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>4cfcbc91-28c6-4c6d-802e-b30457888ce0</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +17,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -32,6 +34,12 @@
 		<Protobuf Include="..\RefreshToken.proto" GrpcServices="Client" />
 		<Protobuf Include="..\Authentication.proto" GrpcServices="Client" />
 		<Protobuf Include="..\logout.proto" GrpcServices="Client" />
+		<Protobuf Include="..\give_role.proto" GrpcServices="Client" />
+		<Protobuf Include="..\artist.proto" GrpcSrvices="Client" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Orchestration\" />
 	</ItemGroup>
 
 	

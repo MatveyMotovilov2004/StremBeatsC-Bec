@@ -14,24 +14,26 @@ namespace MusicBusinessService.Modules.Identity.Application.Register;
 public class RegisterHandler
     : IRequestHandler<RegisterCommand, RegisterUserRespounse>
 {
-    private readonly IdentityDbContext _db;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly ITokenService _tokenService;
     private readonly IUserCreationService _userCreationService;
     private readonly ISessionFactory _sessionFactory;
     private readonly IRefreshTokenFactory _refreshTokenFactory;
-
+    private readonly IDbContextStateAdder _dbContextStateAdder;
     public RegisterHandler(
-        IdentityDbContext db,
+        IUnitOfWork unitOfWork,
         ITokenService tokenService,
         IUserCreationService userRegistrationService,
         ISessionFactory sessionFactory,
-        IRefreshTokenFactory refreshTokenFactory)
+        IRefreshTokenFactory refreshTokenFactory,
+        IDbContextStateAdder dbContextStateAdder)
     {
-        _db = db;
+        _unitOfWork = unitOfWork;
         _tokenService = tokenService;
         _userCreationService = userRegistrationService;
         _sessionFactory = sessionFactory;
         _refreshTokenFactory = refreshTokenFactory;
+        _dbContextStateAdder = dbContextStateAdder;
     }
     public async Task<RegisterUserRespounse> Handle(
         RegisterCommand request, CancellationToken ct)
@@ -42,11 +44,8 @@ public class RegisterHandler
         var refreshToken = _refreshTokenFactory.Create(session);
         var accessToken = _tokenService.GenerateAccessToken(user);
 
-        _db.Add(user);
-        _db.Add(session);
-        _db.Add(refreshToken);
-        
-        await _db.SaveChangesAsync(ct);
+        await _dbContextStateAdder.AddRangeAsync(ct, user, session, refreshToken);
+        await _unitOfWork.SaveChangesAsync(ct);
         
         return new RegisterUserRespounse
         {

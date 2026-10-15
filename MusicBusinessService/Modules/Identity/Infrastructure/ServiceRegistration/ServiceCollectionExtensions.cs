@@ -15,6 +15,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUserReader, UserReader>();
         services.AddScoped<IRefreshTokenReader, RefreshTokenReader>();
         services.AddScoped<IRoleReader, RoleReader>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IDbContextStateAdder, DbContextStateAdder>();
 
         return services;
     }

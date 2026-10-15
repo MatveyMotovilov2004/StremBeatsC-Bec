@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option csharp_namespace = "GiveRoleGrpc";
+
+package music_business;
+
+service GiveRoleGrpcService{
+    rpc GiveRoleArtist ( GiveRoleArtistRequest) returns (GiveRoleArtistResponse);
+}
+
+message GiveRoleArtistRequest{
+    int32 user_id = 1;
+}
+message GiveRoleArtistResponse{
+}

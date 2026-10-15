@@ -17,7 +17,15 @@ public class UserReader : IUserReader
         string email, CancellationToken ct)
     {
         return await _db.user
-        .FirstOrDefaultAsync(
-        x => x.Email == email, ct);
+            .FirstOrDefaultAsync(
+                x => x.Email == email, ct);
+    }
+
+    public async Task<User?> FindByIdAsync(
+        int Id, CancellationToken ct)
+    {
+        return await _db.user
+            .FirstOrDefaultAsync(
+                x => x.Id == Id, ct);
     }
 }

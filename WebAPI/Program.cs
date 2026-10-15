@@ -1,9 +1,9 @@
 
 using FluentValidation;
-using Grpc.Net.Client;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
-using Tracks;
+using WebAPI.Authentication;
+using WebAPI.Diagnostics;
 using WebAPI.GrpcClientRegistration;
 
 
@@ -33,6 +33,11 @@ public class Program
 
         builder.Services.AddBusinessLogicGrpcClient();
         builder.Services.AddGoGrpcClients();
+        builder.Services.AddOrchestrator();
+
+        builder.Services.AddApiAuthentication(builder.Configuration);
+
+        builder.Services.AddProblemDetails();
 
         var app = builder.Build();
 
@@ -41,12 +46,14 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
         app.UseHttpsRedirection();
 
+        app.UseExceptionHandler();
+
+        app.UseAuthentication();
         app.UseAuthorization();
 
-        app.MapControllers();
+        app.MapDiagnosticEndpoints();
 
         app.Run();
     }

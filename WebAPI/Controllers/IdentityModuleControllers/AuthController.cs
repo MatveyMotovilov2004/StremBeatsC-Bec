@@ -1,10 +1,9 @@
 ﻿using AuthenticationGrpc;
 using LogoutGrpc;
-
-//using LogoutGrpc;
 using Microsoft.AspNetCore.Mvc;
 using RefreshTokenGrpc;
 using Register;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace WebAPI.Controllers.IdentityModuleControllers;
@@ -72,6 +71,7 @@ public class AuthController : ControllerBase
         return Ok(response);
     }
 
+    [Authorize]
     [HttpPost("logout")]
     public async Task<IActionResult> Logout(
         [FromBody] LogoutRequest request,

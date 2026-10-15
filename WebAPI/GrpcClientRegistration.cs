@@ -4,6 +4,8 @@ using Register;
 using Tracks;
 using UploadTrack;
 using LogoutGrpc;
+using ArtistGrpc;
+using GiveRoleGrpc;
 
 
 
@@ -31,6 +33,12 @@ public static class GrpcClientRegistration
             o => o.Address = new Uri(address));
         services
             .AddGrpcClient<LogoutGrpcService.LogoutGrpcServiceClient>(
+            o => o.Address = new Uri(address));
+        services
+            .AddGrpcClient<ArtistGrpcService.ArtistGrpcServiceClient>(
+            o => o.Address = new Uri(address));
+        services
+            .AddGrpcClient<GiveRoleGrpcService.GiveRoleGrpcServiceClient>(
             o => o.Address = new Uri(address));
         return services;
     }

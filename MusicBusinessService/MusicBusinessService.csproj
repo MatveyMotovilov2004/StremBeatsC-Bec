@@ -32,9 +32,13 @@
 		<Protobuf Include="..\RefreshToken.proto" GrpcServices="Server" />
 		<Protobuf Include="..\Authentication.proto" GrpcServices="Server" />
 		<Protobuf Include="..\logout.proto" GrpcServices="Server" />
+		<Protobuf Include="..\give_role.proto" GrpcServices="Server" />
+		<Protobuf Include="..\artist.proto" GrpcSrvices="Server" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Modules\Artist\Infrastructure\Persistence\Configuration\" />
+	  <Folder Include="Modules\Artist\Infrastructure\Persistence\Migrations\" />
 	  <Folder Include="Services\" />
 	</ItemGroup>
 	
