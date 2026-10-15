@@ -32,7 +32,7 @@
 		<Protobuf Include="..\Protos\upload_track.proto" GrpcServices="Client" />
 		<Protobuf Include="..\Protos\Register.proto" GrpcServices="Client" />
 		<Protobuf Include="..\Protos\RefreshToken.proto" GrpcServices="Client" />
-		<Protobuf Include="..\Protos\Authentication.proto" GrpcServices="Client" />
+		<Protobuf Include="..\Protos\authentication.proto" GrpcServices="Client" />
 		<Protobuf Include="..\Protos\logout.proto" GrpcServices="Client" />
 		<Protobuf Include="..\Protos\give_role.proto" GrpcServices="Client" />
 		<Protobuf Include="..\Protos\artist.proto" GrpcSrvices="Client" />
