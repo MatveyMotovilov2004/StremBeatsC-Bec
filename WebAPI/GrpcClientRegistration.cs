@@ -15,9 +15,12 @@ namespace WebAPI.GrpcClientRegistration;
 public static class GrpcClientRegistration
 {
     public static IServiceCollection AddBusinessLogicGrpcClient(
-        this IServiceCollection services)
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
-        const string address = "https://localhost:7298";
+        var address = configuration["GrpcService:MusicBusinessService"]
+            ?? throw new InvalidOperationException(
+                "Configuration 'GrpcServices:MusicBusinessService' is missing.");
 
         services
             .AddGrpcClient<TrackGrpcService.TrackGrpcServiceClient>(
