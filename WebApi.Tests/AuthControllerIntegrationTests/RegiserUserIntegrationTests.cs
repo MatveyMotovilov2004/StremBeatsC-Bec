@@ -53,9 +53,9 @@ public class RegiserUserIntegrationTests
             """
             SELECT COUNT(*)
             FROM "user"
-            WHERE "Id" = @id
-            AND "Email" = @email
-            AND "UserName" = @username
+            WHERE "id" = @id
+            AND "email" = @email
+            AND "userName" = @username
             """,
             connection);
 
