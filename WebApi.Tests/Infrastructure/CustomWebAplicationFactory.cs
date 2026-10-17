@@ -14,7 +14,7 @@ public class CustomWebApplicationFactory
 
         builder.UseSetting(
         "GrpcServices:MusicBusinessService",
-        "http://10.0.2.15:8080");
+        "http://music-business-service:8080");
 
         builder.UseSetting(
             "Jwt:Secret",
