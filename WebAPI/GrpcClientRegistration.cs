@@ -18,7 +18,7 @@ public static class GrpcClientRegistration
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        var address = configuration["GrpcService:MusicBusinessService"]
+        var address = configuration["GrpcServices:MusicBusinessService"]
             ?? throw new InvalidOperationException(
                 "Configuration 'GrpcServices:MusicBusinessService' is missing.");
 

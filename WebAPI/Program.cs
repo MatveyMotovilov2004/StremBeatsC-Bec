@@ -13,8 +13,24 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        //AppContext.SetSwitch(
+        //    "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport",
+        //    true);
 
+        var builder = WebApplication.CreateBuilder(args);
+        var configuredSecret = builder.Configuration["Jwt:Secret"];
+        //builder.Configuration.AddJsonFile(
+        //    "secret.json",
+        //    optional: false,
+        //    reloadOnChange: false);
+
+        var jwtOptions = new JwtOptions();
+
+        builder.Configuration
+            .GetSection("Jwt")
+            .Bind(jwtOptions);
+
+        builder.Services.AddSingleton(jwtOptions);
         // Add services to the container.
 
         builder.Services.AddControllers();

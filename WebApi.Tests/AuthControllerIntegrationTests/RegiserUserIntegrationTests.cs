@@ -44,28 +44,28 @@ public class RegiserUserIntegrationTests
         Assert.False(string.IsNullOrWhiteSpace(body.AccessToken));
         Assert.False(string.IsNullOrWhiteSpace(body.RefreshToken));
 
-        //await using var connection = new NpgsqlConnection(
-        //    "Host=127.0.0.1;Port=5433;Database=integration_test_db;Username=testuser;Password=testpassword");
+        await using var connection = new NpgsqlConnection(
+            "Host=127.0.0.1;Port=5433;Database=integration_test_db;Username=testuser;Password=testpassword");
 
-        //await connection.OpenAsync();
+        await connection.OpenAsync();
 
-        //await using var command = new NpgsqlCommand(
-        //    """
-        //    SELECT COUNT(*)
-        //    FROM "user"
-        //    WHERE "Id" = @id
-        //    AND "Email" = @email
-        //    AND "UserName" = @username
-        //    """,
-        //    connection);
+        await using var command = new NpgsqlCommand(
+            """
+            SELECT COUNT(*)
+            FROM "user"
+            WHERE "Id" = @id
+            AND "Email" = @email
+            AND "UserName" = @username
+            """,
+            connection);
 
-        //command.Parameters.AddWithValue("id", body.UserId);
-        //command.Parameters.AddWithValue("email", request.email);
-        //command.Parameters.AddWithValue("username", request.username);
+        command.Parameters.AddWithValue("id", body.UserId);
+        command.Parameters.AddWithValue("email", request.email);
+        command.Parameters.AddWithValue("username", request.username);
 
-        //var count = Convert.ToInt64(await command.ExecuteScalarAsync());
+        var count = Convert.ToInt64(await command.ExecuteScalarAsync());
 
-        //Assert.Equal(1L, count);
+        Assert.Equal(1L, count);
     }
     private class RegisterResponse
     {
