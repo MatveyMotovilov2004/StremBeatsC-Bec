@@ -55,7 +55,7 @@ public class RegiserUserIntegrationTests
             FROM "user"
             WHERE "id" = @id
             AND "email" = @email
-            AND "userName" = @username
+            AND "user_name" = @username
             """,
             connection);
 
