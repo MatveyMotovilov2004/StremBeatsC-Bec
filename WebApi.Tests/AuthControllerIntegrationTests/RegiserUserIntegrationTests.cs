@@ -45,7 +45,7 @@ public class RegiserUserIntegrationTests
         Assert.False(string.IsNullOrWhiteSpace(body.RefreshToken));
 
         await using var connection = new NpgsqlConnection(
-            "Host=127.0.0.1;Port=5433;Database=integration_test_db;Username=testuser;Password=testpassword");
+    "Host=integration-test-postgres;Port=5432;Database=integration_test_db;Username=testuser;Password=testpassword");
 
         await connection.OpenAsync();
 
