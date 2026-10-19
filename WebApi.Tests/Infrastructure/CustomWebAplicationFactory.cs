@@ -18,7 +18,7 @@ public class CustomWebApplicationFactory
 
         builder.UseSetting(
             "Jwt:Secret",
-            "IntegrationTestsOnly_ChangeThisToA32ByteMinimumSecret!");
+            "AMzpqLUpUtG8jRE+SR8n6Tz34JRVsQOLB3h34yaZWRgO/9G3SLKnSpt/VtzvuktL");
 
         builder.UseSetting(
             "Jwt:Issuer",
@@ -27,16 +27,5 @@ public class CustomWebApplicationFactory
         builder.UseSetting(
             "Jwt:Audience",
             "IdentityApplication");
-        //Environment.SetEnvironmentVariable(
-        //"Jwt__Secret",
-        //"IntegrationTestsOnly_ChangeThisToA32ByteMinimumSecret!");
-
-        //Environment.SetEnvironmentVariable(
-        //    "Jwt__Issuer",
-        //    "IdentityInfrastructureAuthentication");
-
-        //Environment.SetEnvironmentVariable(
-        //    "Jwt__Audience",
-        //    "IdentityApplication");
     }
 }

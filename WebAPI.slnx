@@ -1,20 +1,20 @@
 <Solution>
   <Folder Name="/Protos/">
-    <File Path="album.proto" />
-    <File Path="artist.proto" />
-    <File Path="authentication.proto" />
-    <File Path="authorize.proto" />
-    <File Path="favoritetrack.proto" />
-    <File Path="give_role.proto" />
-    <File Path="logout.proto" />
-    <File Path="moderation.proto" />
-    <File Path="playlist.proto" />
-    <File Path="RefreshToken.proto" />
-    <File Path="Register.proto" />
-    <File Path="search.proto" />
-    <File Path="Track.proto" />
-    <File Path="upload_track.proto" />
-    <File Path="user.proto" />
+    <File Path="Protos/album.proto" />
+    <File Path="Protos/artist.proto" />
+    <File Path="Protos/authentication.proto" />
+    <File Path="Protos/authorize.proto" />
+    <File Path="Protos/favoritetrack.proto" />
+    <File Path="Protos/give_role.proto" />
+    <File Path="Protos/logout.proto" />
+    <File Path="Protos/moderation.proto" />
+    <File Path="Protos/playlist.proto" />
+    <File Path="Protos/RefreshToken.proto" />
+    <File Path="Protos/Register.proto" />
+    <File Path="Protos/search.proto" />
+    <File Path="Protos/Track.proto" />
+    <File Path="Protos/upload_track.proto" />
+    <File Path="Protos/user.proto" />
   </Folder>
   <Folder Name="/Элементы решения/">
     <File Path="global.json" />

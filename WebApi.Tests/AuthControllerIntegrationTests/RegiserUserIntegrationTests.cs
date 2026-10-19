@@ -20,6 +20,7 @@ public class RegiserUserIntegrationTests
         _client = factory.CreateClient();
     }
 
+    [Trait("Category", "Identity")]
     [Fact]
     public async Task RegisterUser_WithValidData_ReturnsSuccess()
     {
