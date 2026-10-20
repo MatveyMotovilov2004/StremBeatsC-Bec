@@ -9,4 +9,4 @@ if [[ -n "$FILTER" ]]; then
   CMD+=" --filter-trait 'Category=${FILTER}'"
 fi
 
-docker compose run --rm --entrypoint /bin/bash test-runner -lc "$CMD"
+docker compose --env-file "${ENV_FILE:-.env}" run --rm --entrypoint /bin/bash test-runner -lc "$CMD"

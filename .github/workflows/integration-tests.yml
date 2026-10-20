@@ -1,0 +1,21 @@
+name: Integration Tests
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  integration-tests:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run integration tests
+        env:
+          ENV_FILE: /home/vboxuser/StremBeatsC-Bec/.env
+        run: ./test.sh
