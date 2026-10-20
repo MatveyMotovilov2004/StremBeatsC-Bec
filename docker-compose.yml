@@ -1,0 +1,31 @@
+services:
+  test-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    networks:
+      - integration-test-db_default
+  music-business-service:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: MusicBusinessService/Docker/Dockerfile
+    container_name: music-business-service
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: "http://+:8080"
+      ASPNETCORE_Kestrel__EndpointDefaults__Protocols: Http2
+      ConnectionStrings__DefaultConnection: "Host=integration-test-postgres;Port=5432;Database=integration_test_db;Username=testuser;Password=testpassword"
+      Jwt__Secret: "${JWT_SECRET:?JWT_SECRET is required}"
+      Jwt__Issuer: "${JWT_ISSUER:?JWT_ISSUER is required}"
+      Jwt__Audience: "${JWT_AUDIENCE:?JWT_AUDIENCE is required}"
+      Jwt__ExpirstionMinutes: "${JWT_EXPIRATION_MINUTES:-15}"
+      Jwt__RefreshTokenExpirationDays: "${JWT_REFRESH_TOKEN_EXPIRATION_DAYS:-7}"
+    networks:
+      - integration-test-db_default
+
+networks:
+  integration-test-db_default:
+    external: true
