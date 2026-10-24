@@ -1,4 +1,3 @@
-
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
@@ -13,10 +12,6 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        //AppContext.SetSwitch(
-        //    "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport",
-        //    true);
-
         var builder = WebApplication.CreateBuilder(args);
         var configuredSecret = builder.Configuration["Jwt:Secret"];
         //builder.Configuration.AddJsonFile(
@@ -72,5 +67,7 @@ public class Program
         app.MapDiagnosticEndpoints();
 
         app.Run();
+        //ажный момент: наш docker-compose.yml использует переменные JWT при обработке конфигурации.
+        //Поэтому перед запуском тестов нужно явно указать Compose, где лежит файл.
     }
 }
