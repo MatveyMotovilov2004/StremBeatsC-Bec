@@ -33,7 +33,7 @@
 		<Protobuf Include="..\Protos\authentication.proto" GrpcServices="Server" />
 		<Protobuf Include="..\Protos\logout.proto" GrpcServices="Server" />
 		<Protobuf Include="..\Protos\give_role.proto" GrpcServices="Server" />
-		<Protobuf Include="..\Protos\artist.proto" GrpcSrvices="Server" />
+		<Protobuf Include="..\Protos\artist.proto" GrpcServices="Server" />
 	</ItemGroup>
 
 	<ItemGroup>

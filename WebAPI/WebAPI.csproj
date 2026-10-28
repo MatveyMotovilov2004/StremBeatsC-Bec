@@ -35,11 +35,12 @@
 		<Protobuf Include="..\Protos\authentication.proto" GrpcServices="Client" />
 		<Protobuf Include="..\Protos\logout.proto" GrpcServices="Client" />
 		<Protobuf Include="..\Protos\give_role.proto" GrpcServices="Client" />
-		<Protobuf Include="..\Protos\artist.proto" GrpcSrvices="Client" />
+		<Protobuf Include="..\Protos\artist.proto" GrpcServices="Client" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Orchestration\" />
+	  <Folder Include="Docker\" />
 	</ItemGroup>
 
 	
