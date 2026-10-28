@@ -13,17 +13,17 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        var jwtOptions = new JwtOptions();
+
+        builder.Configuration.AddJsonFile(
+            "secret.json",
+            optional: false,
+            reloadOnChange: false);
         // Add services to the container.
         builder.Services.AddGrpc();
 
         builder.Services.AddCatalogModule(builder.Configuration);
         builder.Services.AddIdentityModule(builder.Configuration);
-
-        builder.Configuration
-            .GetSection("Jwt")
-            .Bind(jwtOptions);
-        builder.Services.AddSingleton(jwtOptions);
+        builder.Services.AddJwtOptions(builder.Configuration);
 
         builder.Services.AddIdentityApplication();
         builder.Services.AddIdentityInfrastructure();
