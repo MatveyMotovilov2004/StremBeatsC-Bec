@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration.Json;
+﻿using Identity.Infrastructure.Secrets;
+using Microsoft.Extensions.Configuration.Json;
 
 namespace Identity.Infrastructure.Authentication;
 
@@ -14,21 +15,7 @@ public static class JwtOptionsRegistration
             ?? throw new InvalidOperationException(
                 "JWT configuration is missing.");
 
-        var secretConfiguration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile(
-                "secret.json",
-                optional: false,
-                reloadOnChange: false)
-            .Build();
-
-        var secret = secretConfiguration["Jwt:Secret"];
-
-        if (string.IsNullOrWhiteSpace(secret))
-        {
-            throw new InvalidOperationException(
-                "JWT secret is missing.");
-        }
+        var secret = DockerSecretReader.ReadRequired("jwt_secret");
 
         jwtOptions.Secret = secret;
 

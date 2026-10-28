@@ -1,4 +1,5 @@
 ﻿using Identity.Infrastructure.Persistence;
+using Identity.Infrastructure.Secrets;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 
@@ -10,13 +11,11 @@ public static class IdentityModule
         this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString =
-            configuration.GetConnectionString("DefaultConnection")
-            ?? throw new InvalidOperationException(
-                "Connection string 'DefaultConnection' is missing.");
+            DockerSecretReader.ReadRequired("db_connection_string");
 
         services.AddDbContext<IdentityDbContext>(option =>
             option
-            .UseNpgsql(configuration.GetConnectionString(connectionString))
+            .UseNpgsql(connectionString)
             .UseSnakeCaseNamingConvention());
         // не регистрирую медиатор так как они все находятся в одном dll
         return services;
