@@ -1,0 +1,61 @@
+name: Auto Create Pull Request
+
+on:
+  workflow_run:
+    workflows:
+      - Integration Tests
+    types:
+      - completed
+    branches:
+      - main-demo
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  create-pr:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Verify latest commit
+        id: verify
+        env:
+          GH_TOKEN: ${{ secrets.PULL_REQUEST_TOKEN }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          CURRENT_SHA=$(gh api \
+            "repos/$GITHUB_REPOSITORY/branches/main-demo" \
+            --jq '.commit.sha')
+
+          if [ "$CURRENT_SHA" != "$HEAD_SHA" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "A newer commit exists. Skipping stale workflow run."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create pull request if needed
+        if: steps.verify.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.PULL_REQUEST_TOKEN }}
+        run: |
+          PR_NUMBER=$(gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --base main \
+            --head main-demo \
+            --state open \
+            --json number \
+            --jq '.[0].number // empty')
+
+          if [ -z "$PR_NUMBER" ]; then
+            gh pr create \
+              --repo "$GITHUB_REPOSITORY" \
+              --base main \
+              --head main-demo \
+              --title "Merge main-demo into main" \
+              --body "Automatically created after successful Integration Tests."
+          else
+            echo "Pull request #$PR_NUMBER already exists."
+          fi
