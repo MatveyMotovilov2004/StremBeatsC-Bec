@@ -14,10 +14,6 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         var configuredSecret = builder.Configuration["Jwt:Secret"];
-        //builder.Configuration.AddJsonFile(
-        //    "secret.json",
-        //    optional: false,
-        //    reloadOnChange: false);
 
         var jwtOptions = new JwtOptions();
 
