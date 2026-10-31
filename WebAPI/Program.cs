@@ -38,7 +38,7 @@ public class Program
             configuration.DisableBuiltInModelValidation = true;
         });
 
-        builder.Services.AddBusinessLogicGrpcClient(builder.Configuration);
+        //builder.Services.AddBusinessLogicGrpcClient(builder.Configuration);
         builder.Services.AddGoGrpcClients();
         builder.Services.AddOrchestrator();
 
