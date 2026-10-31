@@ -3,10 +3,11 @@ name: Integration Tests
 on:
   push:
     branches:
+      - main-demo
       - main
-
-permissions:
-  contents: read
+  pull_request:
+    branches:
+      - main
 
 jobs:
   integration-tests:
