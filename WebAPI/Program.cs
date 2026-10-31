@@ -24,7 +24,7 @@ public class Program
         builder.Services.AddSingleton(jwtOptions);
         // Add services to the container.
 
-        //builder.Services.AddControllers();
+        builder.Services.AddControllers();
 
         builder.Services.AddSwaggerGen();
 
@@ -38,7 +38,7 @@ public class Program
             configuration.DisableBuiltInModelValidation = true;
         });
 
-        builder.Services.AddBusinessLogicGrpcClient(builder.Configuration);
+        //builder.Services.AddBusinessLogicGrpcClient(builder.Configuration);
         builder.Services.AddGoGrpcClients();
         builder.Services.AddOrchestrator();
 
