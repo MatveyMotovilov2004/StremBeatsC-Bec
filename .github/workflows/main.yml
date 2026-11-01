@@ -1,0 +1,23 @@
+name: Merge Queue
+
+on:
+  merge_group:
+    types:
+      - checks_requested
+
+permissions:
+  contents: read
+
+jobs:
+  integration-tests:
+    name: integration-tests
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run integration tests
+        env:
+          ENV_FILE: /home/vboxuser/StremBeatsC-Bec/.env
+        run: ./test.sh
